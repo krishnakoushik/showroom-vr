@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import * as THREE from 'three';
@@ -11,12 +10,12 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-import Ferrari from './assets/ferrari.glb';
-import FerrariPng from './assets/ferrari_ao.png';
+import asset_loader from './asset_loader';
 
 function App() {
     let camera, scene, renderer;
     let stats;
+    const THREE_PATH = `https://unpkg.com/three@0.${THREE.REVISION}.x`;
 
     let grid;
     let controls;
@@ -62,7 +61,7 @@ function App() {
         scene.environment = pmremGenerator.fromScene(
             new RoomEnvironment()
         ).texture;
-        scene.fog = new THREE.Fog(0xeeeeee, 10, 50);
+        // scene.fog = new THREE.Fog(0xeeeeee, 10, 50);
 
         grid = new THREE.GridHelper(100, 40, 0x000000, 0x000000);
         grid.material.opacity = 0.1;
@@ -72,92 +71,58 @@ function App() {
 
         // materials
 
-        const bodyMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0xff0000,
-            metalness: 0.6,
-            roughness: 0.4,
-            clearcoat: 0.05,
-            clearcoatRoughness: 0.05,
-        });
+        // const bodyMaterial = new THREE.MeshPhysicalMaterial({
+        // color: 0xff0000,
+        // metalness: 0.6,
+        // roughness: 0.4,
+        // clearcoat: 0.05,
+        // clearcoatRoughness: 0.05,
+        // });
 
-        const detailsMaterial = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            metalness: 1.0,
-            roughness: 0.5,
-        });
+        // const detailsMaterial = new THREE.MeshStandardMaterial({
+        // color: 0xffffff,
+        // metalness: 1.0,
+        // roughness: 0.5,
+        // });
 
-        const glassMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0xffffff,
-            metalness: 0,
-            roughness: 0.1,
-            transmission: 0.9,
-            transparent: true,
-        });
+        // const glassMaterial = new THREE.MeshPhysicalMaterial({
+        // color: 0xffffff,
+        // metalness: 0,
+        // roughness: 0.1,
+        // transmission: 0.9,
+        // transparent: true,
+        // });
 
-        const bodyColorInput = document.getElementById('body-color');
-        bodyColorInput.addEventListener('input', function () {
-            bodyMaterial.color.set(this.value);
-        });
+        // const bodyColorInput = document.getElementById('body-color');
+        // bodyColorInput.addEventListener('input', function () {
+        // bodyMaterial.color.set(this.value);
+        // });
 
-        const detailsColorInput = document.getElementById('details-color');
-        detailsColorInput.addEventListener('input', function () {
-            detailsMaterial.color.set(this.value);
-        });
+        // const detailsColorInput = document.getElementById('details-color');
+        // detailsColorInput.addEventListener('input', function () {
+        // detailsMaterial.color.set(this.value);
+        // });
 
-        const glassColorInput = document.getElementById('glass-color');
-        glassColorInput.addEventListener('input', function () {
-            glassMaterial.color.set(this.value);
-        });
+        // const glassColorInput = document.getElementById('glass-color');
+        // glassColorInput.addEventListener('input', function () {
+        // glassMaterial.color.set(this.value);
+        // });
 
         // Car
 
-        const shadow = new THREE.TextureLoader().load(FerrariPng);
+        const shadow = new THREE.TextureLoader().load('assets/ferrari_ao.png');
 
         const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderConfig({ type: 'js' });
         dracoLoader.setDecoderPath(
-            'https://www.gstatic.com/draco/v1/decoders/'
+            `${THREE_PATH}/examples/js/libs/draco/gltf/`
         );
-
         const loader = new GLTFLoader();
         loader.setDRACOLoader(dracoLoader);
+        const models = ['assets/ferrarij50.glb', 'assets/ferrari_f40.glb'];
 
-        loader.load(Ferrari, function (gltf) {
-            const carModel = gltf.scene.children[0];
+        // Load a glTF resource
+        asset_loader(THREE, loader, shadow, scene, [0.1, 0.1, 0.1], models[1]);
 
-            carModel.getObjectByName('body').material = bodyMaterial;
-
-            carModel.getObjectByName('rim_fl').material = detailsMaterial;
-            carModel.getObjectByName('rim_fr').material = detailsMaterial;
-            carModel.getObjectByName('rim_rr').material = detailsMaterial;
-            carModel.getObjectByName('rim_rl').material = detailsMaterial;
-            carModel.getObjectByName('trim').material = detailsMaterial;
-
-            carModel.getObjectByName('glass').material = glassMaterial;
-
-            wheels.push(
-                carModel.getObjectByName('wheel_fl'),
-                carModel.getObjectByName('wheel_fr'),
-                carModel.getObjectByName('wheel_rl'),
-                carModel.getObjectByName('wheel_rr')
-            );
-
-            // shadow
-            const mesh = new THREE.Mesh(
-                new THREE.PlaneGeometry(0.655 * 4, 1.3 * 4),
-                new THREE.MeshBasicMaterial({
-                    map: shadow,
-                    blending: THREE.MultiplyBlending,
-                    toneMapped: false,
-                    transparent: true,
-                })
-            );
-            mesh.rotation.x = -Math.PI / 2;
-            mesh.renderOrder = 2;
-            carModel.add(mesh);
-
-            scene.add(carModel);
-        });
         document.body.appendChild(VRButton.createButton(renderer));
     }
 
