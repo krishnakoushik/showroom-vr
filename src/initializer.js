@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import asset_loader from './asset_loader';
 import * as THREE from 'three';
+import VRControl from './VRControl';
 
 function onWindowResize(camera, renderer) {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -33,6 +34,12 @@ function render(wheels, grid, renderer, scene, camera, stats) {
     stats.update();
 }
 
+function moveCamera(camera, dolly, isMoving) {
+    if (!isMoving) return;
+    const direction = new THREE.Vector3();
+    camera.getWorldDirection(direction);
+    dolly.position.add(direction.multiplyScalar(0.1));
+}
 export function init(
     renderer,
     camera,
@@ -42,7 +49,10 @@ export function init(
     wheels,
     stats,
     model_location,
-    scale
+    scale,
+    vrControl,
+    dolly,
+    isMoving
 ) {
     const THREE_PATH = `https://unpkg.com/three@0.${THREE.REVISION}.x`;
     const container = document.getElementById('container');
@@ -144,5 +154,25 @@ export function init(
     asset_loader(THREE, loader, shadow, scene, scale, model_location);
 
     document.body.appendChild(VRButton.createButton(renderer));
+
+    vrControl = VRControl(renderer, camera, scene);
+
+    scene.add(vrControl.controllerGrips[0], vrControl.controllers[0]);
+
+    vrControl.controllers[0].addEventListener('selectstart', () => {
+        isMoving = true;
+    });
+    vrControl.controllers[0].addEventListener('selectend', () => {
+        isMoving = false;
+    });
+
+    // This helps move the camera
+    dolly = new THREE.Group();
+    dolly.position.set(0, 0, 0);
+    dolly.name = 'dolly';
+    scene.add(dolly);
+    dolly.add(camera);
+
+    setInterval(() => moveCamera(camera, dolly, isMoving), 100);
     animate(renderer, wheels, grid, scene, camera, stats);
 }

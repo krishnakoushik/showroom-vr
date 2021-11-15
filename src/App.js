@@ -6,7 +6,8 @@ import { init } from './initializer';
 import { useEffect, useState } from 'react';
 
 function App() {
-    let camera, scene, renderer;
+    let camera, scene, renderer, vrControl, dolly;
+    let isMoving = false;
     let stats;
     const THREE_PATH = `https://unpkg.com/three@0.${THREE.REVISION}.x`;
 
@@ -36,7 +37,10 @@ function App() {
             wheels,
             stats,
             option_to_model[modelName],
-            scale_mapper[modelName]
+            scale_mapper[modelName],
+            vrControl,
+            dolly,
+            isMoving
         );
         return () => {
             document.getElementById('container').innerHTML = '';
