@@ -6,7 +6,8 @@ export default function asset_loader(
     scene,
     scale,
     wheels,
-    model_location
+    model_location,
+    isCustomizable
 ) {
     // materials
 
@@ -32,7 +33,7 @@ export default function asset_loader(
         transparent: true,
     });
 
-    if (model_location === "assets/ferrari.glb") {
+    if (isCustomizable) {
         const bodyColorInput = document.getElementById("body-color");
         bodyColorInput.addEventListener("input", function () {
             bodyMaterial.color.set(this.value);
@@ -56,7 +57,7 @@ export default function asset_loader(
         function (gltf) {
             const carModel = gltf.scene || gltf.scene.children[0];
             carModel.scale.set(scale[0], scale[1], scale[2]);
-            if (model_location === "assets/ferrari.glb") {
+            if (isCustomizable) {
                 carModel.getObjectByName("body").material = bodyMaterial;
 
                 carModel.getObjectByName("rim_fl").material = detailsMaterial;

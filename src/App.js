@@ -24,6 +24,9 @@ function App() {
         "Ferrari F40": [0.1, 0.1, 0.1],
         "Ferrari 458 Italia": [1, 1, 1],
     };
+    const customizable = [
+        "Ferrari 458 Italia"
+    ];
     const default_model = form_options[0];
     const [modelName, setModelName] = useState(default_model);
 
@@ -43,7 +46,8 @@ function App() {
             scale_mapper[modelName],
             vrControl,
             dolly,
-            isMoving
+            isMoving,
+            customizable.includes(modelName)
         );
     }, [modelName]);
 
@@ -85,7 +89,7 @@ function App() {
             </label>
 
             <h1 align="center">VR SHOWROOM</h1>
-            {modelName === "Ferrari 458 Italia" && (
+            {(customizable.includes(modelName) ) && (
                 <div id="controls">
                     <span className="colorPicker">
                         <input

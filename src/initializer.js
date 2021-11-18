@@ -52,7 +52,8 @@ export function init(
     scale,
     vrControl,
     dolly,
-    isMoving
+    isMoving,
+    isCustomizable
 ) {
     const THREE_PATH = `https://unpkg.com/three@0.${THREE.REVISION}.x`;
     const container = document.getElementById("container");
@@ -85,7 +86,7 @@ export function init(
     camera.position.set(4.25, 1.4, -4.5);
 
     controls = new OrbitControls(camera, container);
-    controls.target.set(0, 0.5, 0);
+    controls.target.set(0, 0, 0);
     controls.update();
 
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -113,7 +114,7 @@ export function init(
 
     // Load a glTF resource
 
-    asset_loader(THREE, loader, shadow, scene, scale, wheels, model_location);
+    asset_loader(THREE, loader, shadow, scene, scale, wheels, model_location,isCustomizable);
 
     document.body.appendChild(VRButton.createButton(renderer));
 
