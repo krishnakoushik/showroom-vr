@@ -1,9 +1,9 @@
-import "./App.css";
+import './App.css';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { init } from "./initializer";
-import { useEffect, useState } from "react";
+import { init } from './initializer';
+import { useEffect, useState } from 'react';
 
 function App() {
     let camera, scene, renderer, vrControl, dolly;
@@ -13,27 +13,25 @@ function App() {
 
     let grid;
     let controls;
-    const form_options = ["Ferrari J50", "Ferrari F40", "Ferrari 458 Italia"];
+    const form_options = ['Ferrari J50', 'Ferrari F40', 'Ferrari 458 Italia'];
     const option_to_model = {
-        "Ferrari J50": "assets/ferrarij50.glb",
-        "Ferrari F40": "assets/ferrari_f40.glb",
-        "Ferrari 458 Italia": "assets/ferrari.glb",
+        'Ferrari J50': 'assets/ferrarij50.glb',
+        'Ferrari F40': 'assets/ferrari_f40.glb',
+        'Ferrari 458 Italia': 'assets/ferrari.glb',
     };
     const scale_mapper = {
-        "Ferrari J50": [0.015, 0.015, 0.015],
-        "Ferrari F40": [0.1, 0.1, 0.1],
-        "Ferrari 458 Italia": [1, 1, 1],
+        'Ferrari J50': [0.015, 0.015, 0.015],
+        'Ferrari F40': [0.1, 0.1, 0.1],
+        'Ferrari 458 Italia': [1, 1, 1],
     };
-    const customizable = [
-        "Ferrari 458 Italia"
-    ];
-    const default_model = form_options[0];
+    const customizable = ['Ferrari 458 Italia'];
+    const default_model = form_options[2];
     const [modelName, setModelName] = useState(default_model);
 
     const wheels = [];
     useEffect(() => {
-        console.log("HI" + modelName);
-        document.getElementById("container").innerHTML = "";
+        console.log('HI' + modelName);
+        document.getElementById('container').innerHTML = '';
         init(
             renderer,
             camera,
@@ -51,19 +49,19 @@ function App() {
         );
     }, [modelName]);
 
-    const [bodyColor, setbodyColor] = useState("#ff0000");
+    const [bodyColor, setbodyColor] = useState('#ff0000');
     const bodyColorOnChange = (event) => {
         event.preventDefault();
         setbodyColor(event.target.value);
     };
 
-    const [detailsColor, setDetailsColor] = useState("#ffffff");
+    const [detailsColor, setDetailsColor] = useState('#ffffff');
     const detailsColorOnChange = (event) => {
         event.preventDefault();
         setDetailsColor(event.target.value);
     };
 
-    const [glassColor, setGlassColor] = useState("#ffffff");
+    const [glassColor, setGlassColor] = useState('#ffffff');
     const glassColorOnChange = (event) => {
         event.preventDefault();
         setGlassColor(event.target.value);
@@ -79,17 +77,17 @@ function App() {
                         setModelName(event.target.value);
                     }}
                 >
-                    {" "}
+                    {' '}
                     {form_options.map((val) => (
                         <option value={val} key={val}>
-                            {val}{" "}
+                            {val}{' '}
                         </option>
                     ))}
                 </select>
             </label>
 
             <h1 align="center">VR SHOWROOM</h1>
-            {(customizable.includes(modelName) ) && (
+            {customizable.includes(modelName) && (
                 <div id="controls">
                     <span className="colorPicker">
                         <input
