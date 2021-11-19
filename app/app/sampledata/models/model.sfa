@@ -1,0 +1,84 @@
+{
+  materials: [
+    {
+      name: '_Lamborghini_AventadorLamborghini_Aventador_BodySG',
+      parameters: [
+        {
+          baseColor: 'Lamborginhi Aventador_diffuse',
+        },
+        {
+          baseColorTint: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.31622800000000001,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+    {
+      name: '_Lamborghini_AventadorLamborghini_Aventador_GlassSG',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          metallic: 1,
+        },
+        {
+          roughness: 0.56298999999999999,
+        },
+        {
+          opacity: 0.059999999999999998,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/model.obj',
+    name: 'model',
+    recenter: 'root',
+    scale: 0.0085070000000000007,
+  },
+  samplers: [
+    {
+      file: 'sampledata/models/Lamborginhi Aventador_diffuse.jpeg',
+      name: 'Lamborginhi Aventador_diffuse',
+      params: {
+        usage_type: 'Data',
+      },
+      pipeline_name: 'E:\\car\\new 1\\Lamborginhi_Aventador_OBJ\\Lamborginhi Aventador OBJ\\Lamborginhi Aventador_diffuse.jpeg',
+    },
+    {
+      file: 'sampledata/models/Lamborginhi Aventador_spec.jpeg',
+      name: 'Lamborginhi Aventador_spec',
+      pipeline_name: 'E:\\car\\new 1\\Lamborginhi_Aventador_OBJ\\Lamborginhi Aventador OBJ\\Lamborginhi Aventador_spec.jpeg',
+    },
+  ],
+  version: '0.54:2',
+}
