@@ -1,3 +1,5 @@
+[![AR App](https://img.shields.io/badge/Download-APK-red.svg?style=for-the-badge&logo=android)](https://drive.google.com/file/d/1DEYfHpuhxE1ISTjf4mG717fqYmGgWMla/view?usp=sharing)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
