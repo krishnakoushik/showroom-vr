@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/showroom-vr/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/showroom-vr/static/js/main.93c68fd1.chunk.js",
-    "main.js.map": "/showroom-vr/static/js/main.93c68fd1.chunk.js.map",
+    "main.js": "/showroom-vr/static/js/main.6b05b9c0.chunk.js",
+    "main.js.map": "/showroom-vr/static/js/main.6b05b9c0.chunk.js.map",
     "runtime-main.js": "/showroom-vr/static/js/runtime-main.a392ea99.js",
     "runtime-main.js.map": "/showroom-vr/static/js/runtime-main.a392ea99.js.map",
     "static/js/2.ff4e617e.chunk.js": "/showroom-vr/static/js/2.ff4e617e.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.a392ea99.js",
     "static/js/2.ff4e617e.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.93c68fd1.chunk.js"
+    "static/js/main.6b05b9c0.chunk.js"
   ]
 }
