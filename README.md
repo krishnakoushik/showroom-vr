@@ -20,3 +20,6 @@
 -   `cd showroom-vr`
 -   `npm install`
 -   `npm start`
+
+
+> Models for VR were taken from [sketchfab](https://sketchfab.com)
